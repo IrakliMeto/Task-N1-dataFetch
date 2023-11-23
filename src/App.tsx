@@ -11,6 +11,9 @@ function App() {
   const [data, setData] = useState<IPost[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const [windowSize, setWindowSize] = useState<number>(0);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+
   useEffect(() => {
     const savedData = localStorage.getItem('savedData');
     if (savedData) {
@@ -19,6 +22,34 @@ function App() {
       fetchData();
     }
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const calcContainerWidth = () => {
+    if (windowSize < 1024) {
+      return setContainerWidth(100);
+    } else if (windowSize < 1440) {
+      return setContainerWidth(90);
+    } else {
+      return setContainerWidth(80);
+    }
+  };
+
+  useEffect(() => {
+    calcContainerWidth();
+  }, [windowSize]);
+
+  console.log(containerWidth);
 
   const fetchData = () => {
     fetch('https://jsonplaceholder.typicode.com/posts?size=50')
@@ -48,7 +79,14 @@ function App() {
   };
 
   return (
-    <div className='App'>
+    <div
+      className='App'
+      style={{
+        width: `${containerWidth}%`,
+      }}
+    >
+      <div>Window Width: {windowSize}</div>
+
       <button onClick={fetchData}>Fetch Data</button>
       {data ? <h3>posts quantity: {data?.length}</h3> : null}
 
