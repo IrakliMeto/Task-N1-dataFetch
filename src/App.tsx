@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import CounterContext from './Context/CounterContext';
+import CounterResult from './Components/CounterResult';
+import CounterCalculate from './Components/CounterCalculate';
 
 interface IPost {
   userId: number;
@@ -12,6 +15,9 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
+
+  // for context
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     const savedData = localStorage.getItem('savedData');
@@ -80,7 +86,7 @@ function App() {
         margin: '0 auto',
       }}
     >
-      <button onClick={fetchData}>Fetch Data</button>
+      {/* <button onClick={fetchData}>Fetch Data</button>
       {data ? <h3>posts quantity: {data?.length}</h3> : null}
 
       {error ? (
@@ -102,7 +108,12 @@ function App() {
             <p>Loading...</p>
           )}
         </div>
-      )}
+      )} */}
+
+      <CounterContext.Provider value={{ count, setCount }}>
+        <CounterResult />
+        <CounterCalculate />
+      </CounterContext.Provider>
     </div>
   );
 }
