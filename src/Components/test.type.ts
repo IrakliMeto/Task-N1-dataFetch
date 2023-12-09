@@ -10,7 +10,7 @@ export type Func = {
 
 export interface Inumbers {
   a: number;
-  b: number;
+  b?: number | null;
 }
 
 export interface person {
