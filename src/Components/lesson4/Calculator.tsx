@@ -28,8 +28,7 @@ export default function Calculator() {
     if (!tipPercent || !numberOfPeople || !bill) return;
 
     const calculateTip = ((bill / 100) * tipPercent) / numberOfPeople;
-    const percentInMoney = (bill / 100) * tipPercent;
-    const calculateTotal = (bill + percentInMoney) / numberOfPeople;
+    const calculateTotal = (bill + (bill / 100) * tipPercent) / numberOfPeople;
 
     setAmount({
       tipAmount: calculateTip,
