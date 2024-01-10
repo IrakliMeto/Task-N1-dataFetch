@@ -3,21 +3,24 @@ import Result from './Result';
 import Buttons from './Buttons';
 
 export default function Calculator() {
-  const [bill, setBill] = useState(0);
-  const [numberOfPeople, setNumberOfPeople] = useState(0);
-  const [tipPercent, setTipPercent] = useState(0);
-  const [amount, setAmount] = useState({
+  const [bill, setBill] = useState<number>(0);
+  const [numberOfPeople, setNumberOfPeople] = useState<number>(0);
+  const [tipPercent, setTipPercent] = useState<number>(0);
+  const [amount, setAmount] = useState<{
+    tipAmount: number;
+    totalAmount: number;
+  }>({
     tipAmount: 0,
     totalAmount: 0,
   });
 
   const percents = [10, 15, 20, 30, 50];
 
-  const handleBillChange = (event: any) => {
+  const handleBillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBill(+event.target.value);
   };
 
-  const handleNumberOfPeople = (event: any) => {
+  const handleNumberOfPeople = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberOfPeople(+event.target.value);
   };
 
@@ -25,7 +28,8 @@ export default function Calculator() {
     if (!tipPercent || !numberOfPeople || !bill) return;
 
     const calculateTip = ((bill / 100) * tipPercent) / numberOfPeople;
-    const calculateTotal = bill + ((bill / 100) * tipPercent) / numberOfPeople;
+    const percentInMoney = (bill / 100) * tipPercent;
+    const calculateTotal = (bill + percentInMoney) / numberOfPeople;
 
     setAmount({
       tipAmount: calculateTip,
