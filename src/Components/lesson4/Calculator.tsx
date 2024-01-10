@@ -37,8 +37,10 @@ export default function Calculator() {
   }, [bill, numberOfPeople, tipPercent]);
 
   return (
-    <div>
-      <div>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', margin: '0 auto', width: 'fit-content' }}
+    >
+      <div style={{ marginRight: '20px' }}>
         <h4>Bill</h4>
         <input value={bill ? bill : ''} onChange={handleBillChange} type='number' placeholder='$' />
       </div>
@@ -48,6 +50,7 @@ export default function Calculator() {
       <div>
         <h4>number of people</h4>
         <input
+          style={{ padding: '5px', fontSize: '16px' }}
           value={numberOfPeople ? numberOfPeople : ''}
           onChange={handleNumberOfPeople}
           type='number'
@@ -58,6 +61,16 @@ export default function Calculator() {
       <Result amounts={amount} />
 
       <button
+        style={{
+          width: '100px',
+          padding: '8px 16px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          marginTop: '10px',
+        }}
         onClick={() => {
           setAmount({
             tipAmount: 0,
