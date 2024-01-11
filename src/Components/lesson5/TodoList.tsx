@@ -18,8 +18,6 @@ const TodoList: React.FC = () => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
   }, [todoList]);
 
-  console.log(todoList, 'todoList zemot');
-
   const addTodo = () => {
     if (todo) {
       setTodoList([
@@ -43,7 +41,6 @@ const TodoList: React.FC = () => {
 
     if (editItem) {
       saveItem(editItem);
-      return;
     } else {
       addTodo();
     }
@@ -72,7 +69,6 @@ const TodoList: React.FC = () => {
     const updatedTodoList = todoList.map((item) =>
       item.id === itemSave.id ? { ...item, text: todo } : item
     );
-    console.log('updatedTodoList', { updatedTodoList });
 
     setTodoList(updatedTodoList);
     setEditItem(null);
