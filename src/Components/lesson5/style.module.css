@@ -1,0 +1,10 @@
+.done {
+  background-color: green;
+}
+
+.item {
+  width: fit-content;
+  padding: 5px;
+  gap: 5px;
+  display: flex;
+}
