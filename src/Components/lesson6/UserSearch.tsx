@@ -14,7 +14,6 @@ export default function UserSearch() {
         return response.json();
       })
       .then((data: any) => {
-        console.log('datA:', data);
         setUser(data);
       });
   };
